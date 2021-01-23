@@ -1,0 +1,5 @@
+t <- Sys.time()
+t <- as.character(t)
+fileConn<-file("data/time.txt")
+writeLines(t, fileConn)
+close(fileConn)
