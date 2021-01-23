@@ -17,6 +17,9 @@ jobs:
         with:
           r-version: '4.0.2'
     
+    # instalace závislostí
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+    
     # instalace knihoven
       - run: Rscript -e "install.packages(c('shiny', 'rsconnect'))"
         
