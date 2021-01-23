@@ -8,16 +8,21 @@ jobs:
   deploy-shiny:
     runs-on: ubuntu-latest
     steps:
+    # zkopírování repozitory
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-      - name: Install shiny
+    
+    # instalace R
+      - name: setup-r
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.0.2'
+    
+    # instalace knihoven
       - run: R -e 'install.packages(c("shiny", "rsconnect"), type = "binary")'
         
     # aktualizace času
       - run: Rscript timestamp.R
     
     # nasazeni do shinyapps.io
-      - name: Push to shiny.io
-        run: |
-          Rscript -e "rsconnect::setAccountInfo(name='trusinas', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
-          Rscript -e "rsconnect::deployApp(appFileManifest = 'fileManifest.txt', appName = 'ga_test')"
+      - run: Rscript -e "rsconnect::setAccountInfo(name='trusinas', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
+      - run: Rscript -e "rsconnect::deployApp(appFileManifest = 'fileManifest.txt', appName = 'ga_test')"
