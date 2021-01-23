@@ -18,7 +18,7 @@ jobs:
           r-version: '4.0.2'
     
     # instalace knihoven
-      - run: R -e 'install.packages(c("shiny", "rsconnect"))'
+      - run: Rscript -e "install.packages(c('shiny', 'rsconnect'))"
         
     # aktualizace času
       - run: Rscript timestamp.R
