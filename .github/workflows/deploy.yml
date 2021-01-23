@@ -2,7 +2,7 @@ name: deploy-shiny
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '0/15 * * * *'
 
 jobs:
   deploy-shiny:
@@ -11,9 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install shiny
-        run: |
-          install.packages(c("shiny", "rsconnect"), type = "binary")
-        shell: Rscript {0}
+      - run: R -e 'install.packages(c("shiny", "rsconnect"), type = "binary")'
         
     # aktualizace času
       - run: Rscript timestamp.R
