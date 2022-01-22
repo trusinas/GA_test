@@ -18,13 +18,10 @@ jobs:
         with:
           r-version: '4.0.5'
     
-    # instalace knihoven a závislostí
-      - uses: r-lib/actions/setup-r-dependencies@v2
+    # instalace knihoven a závislostí pomocí renv
+      - uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
-          extra-packages: |
-            any::shiny
-            any::rsconnect
         
     # aktualizace času
       - run: Rscript timestamp.R
